@@ -1,34 +1,21 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>ShotTrack - Projects</title>
+    <title>ShotTrack</title>
+
+    <!-- Connect CSS from static folder -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
 </head>
+
 <body>
 
-    <h1>ShotTrack - Project Dashboard</h1>
+    <h1>Welcome to ShotTrack</h1>
+    <p>This is my first Flask app running from GitHub.</p>
 
-    <h3>Add New Project</h3>
-    <form method="POST">
-        <input type="text" name="project_name" placeholder="Project Name" required>
-
-        <select name="project_type" required>
-            <option value="Film">Feature Film (Reels)</option>
-            <option value="Series">Series (Episodes)</option>
-        </select>
-
-        <button type="submit">Create Project</button>
-    </form>
-
-    <h3>Project List</h3>
-    <ul>
-        {% for project in projects %}
-            <li>
-                <a href="/project/{{ project[0] }}">
-                    {{ project[1] }} ({{ project[2] }})
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+    <button>Add Project</button>
 
 </body>
+
 </html>
