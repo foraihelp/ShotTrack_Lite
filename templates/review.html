@@ -1,0 +1,41 @@
+<h2>Review Player</h2>
+
+<video width="800" controls>
+<source src="/{{version[3]}}">
+</video>
+
+<form method="POST">
+
+<select name="status">
+
+<option>Pending</option>
+<option>Approved</option>
+<option>Rejected</option>
+
+</select>
+
+<button>Update</button>
+
+</form>
+
+<hr>
+
+<h3>Add Comment</h3>
+
+<form method="POST">
+
+<input name="user" placeholder="Your name">
+
+<textarea name="comment"></textarea>
+
+<button>Comment</button>
+
+</form>
+
+<hr>
+
+{% for c in comments %}
+
+<b>{{c[2]}}</b>: {{c[3]}}<br>
+
+{% endfor %}

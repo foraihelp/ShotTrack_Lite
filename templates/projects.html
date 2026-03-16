@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<style>
+
+body{
+font-family:Arial;
+}
+
+table{
+border-collapse:collapse;
+width:95%;
+}
+
+th,td{
+border:1px solid #ccc;
+padding:8px;
+text-align:center;
+}
+
+th{
+background:#333;
+color:white;
+}
+
+/* STATUS COLORS */
+
+.yts{
+background:#d9d9d9;
+}
+
+.wip{
+background:#fff3a0;
+}
+
+.finished{
+background:#4dabf7;
+}
+
+.delivered{
+background:#6bcf63;
+}
+
+.omitted{
+background:#ff4d4d;
+color:white;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Create Project</h2>
+
+<form method="POST">
+
+<input type="hidden" name="action" value="create">
+
+<input name="name" placeholder="Project Name" required>
+
+<select name="type">
+
+<option>Movie</option>
+<option>Series</option>
+<option>Commercial</option>
+<option>Events</option>
+<option>Others</option>
+
+</select>
+
+<select name="status">
+
+<option>YTS</option>
+<option>WIP</option>
+<option>FINISHED</option>
+<option>DELIVERED</option>
+<option>OMITTED</option>
+
+</select>
+
+<button>Create</button>
+
+</form>
+
+<hr>
+
+<h2>Projects</h2>
+
+<table>
+
+<tr>
+<th>Project</th>
+<th>Type</th>
+<th>Status</th>
+<th>Rename</th>
+<th>Delete</th>
+</tr>
+
+{% for p in projects %}
+
+<tr>
+
+<td>
+
+<a href="/project/{{p[0]}}">
+{{p[1]}}
+</a>
+
+</td>
+
+<td>
+
+<form method="POST">
+
+<input type="hidden" name="action" value="type">
+<input type="hidden" name="id" value="{{p[0]}}">
+
+<select name="value" onchange="this.form.submit()">
+
+<option {% if p[2]=='Movie' %}selected{% endif %}>Movie</option>
+<option {% if p[2]=='Series' %}selected{% endif %}>Series</option>
+<option {% if p[2]=='Commercial' %}selected{% endif %}>Commercial</option>
+<option {% if p[2]=='Events' %}selected{% endif %}>Events</option>
+<option {% if p[2]=='Others' %}selected{% endif %}>Others</option>
+
+</select>
+
+</form>
+
+</td>
+
+<td class="{{p[3]|lower}}">
+
+<form method="POST">
+
+<input type="hidden" name="action" value="status">
+<input type="hidden" name="id" value="{{p[0]}}">
+
+<select name="value" onchange="this.form.submit()">
+
+<option {% if p[3]=='YTS' %}selected{% endif %}>YTS</option>
+<option {% if p[3]=='WIP' %}selected{% endif %}>WIP</option>
+<option {% if p[3]=='FINISHED' %}selected{% endif %}>FINISHED</option>
+<option {% if p[3]=='DELIVERED' %}selected{% endif %}>DELIVERED</option>
+<option {% if p[3]=='OMITTED' %}selected{% endif %}>OMITTED</option>
+
+</select>
+
+</form>
+
+</td>
+
+<td>
+
+<form method="POST">
+
+<input type="hidden" name="action" value="rename">
+<input type="hidden" name="id" value="{{p[0]}}">
+
+<input name="new" placeholder="Rename">
+
+<button>Rename</button>
+
+</form>
+
+</td>
+
+<td>
+
+<form method="POST">
+
+<input type="hidden" name="action" value="delete">
+<input type="hidden" name="id" value="{{p[0]}}">
+
+<button>Delete</button>
+
+</form>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>

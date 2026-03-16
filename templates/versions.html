@@ -1,0 +1,19 @@
+<h2>Versions</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+<input type="file" name="movie">
+<button>Upload Version</button>
+
+</form>
+
+<hr>
+
+{% for v in versions %}
+
+{{v[2]}}  
+<a href="/review/{{v[0]}}">Review</a>
+
+<br>
+
+{% endfor %}

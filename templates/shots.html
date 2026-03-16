@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<style>
+
+body{
+font-family:Arial;
+}
+
+table{
+border-collapse:collapse;
+width:85%;
+}
+
+th,td{
+border:1px solid #ccc;
+padding:8px;
+text-align:center;
+}
+
+th{
+background:#333;
+color:white;
+}
+
+.yts{background:#d9d9d9;}
+.wip{background:#fff3a0;}
+.suprvw{background:#ffb347;}
+.vfxsuprvw{background:#c084fc;}
+.clientrvw{background:#ff6fae;}
+.finished{background:#4dabf7;}
+.delivered{background:#6bcf63;}
+.omitted{background:#ff4d4d;}
+
+</style>
+
+</head>
+
+<body>
+
+<h3>
+
+<a href="/">Projects</a> /
+<a href="/project/{{project[0]}}">{{project[1]}}</a> /
+<a href="/unit/{{unit[0]}}">{{unit[1]}}</a> /
+{{sequence[1]}}
+
+</h3>
+
+<h3>Add Shot</h3>
+
+<form method="POST">
+
+<input type="hidden" name="action" value="add">
+
+<button>Add Shot</button>
+
+</form>
+
+<hr>
+
+<table>
+
+<tr>
+<th>Shot</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+{% for sh in shots %}
+
+<tr class="{{sh[2]|lower|replace(' ','')}}">
+
+<td>{{sh[1]}}</td>
+
+<td>
+
+<form method="POST">
+
+<input type="hidden" name="action" value="status">
+<input type="hidden" name="id" value="{{sh[0]}}">
+
+<select name="value" onchange="this.form.submit()">
+
+<option>YTS</option>
+<option>WIP</option>
+<option>SUP RVW</option>
+<option>VFX SUP RVW</option>
+<option>CLIENT RVW</option>
+<option>FINISHED</option>
+<option>DELIVERED</option>
+<option>OMITTED</option>
+
+</select>
+
+</form>
+
+</td>
+
+<td>
+
+<form method="POST" style="display:inline">
+
+<input type="hidden" name="action" value="rename">
+<input type="hidden" name="id" value="{{sh[0]}}">
+
+<input name="new" placeholder="Rename">
+
+<button>Rename</button>
+
+</form>
+
+<form method="POST" style="display:inline">
+
+<input type="hidden" name="action" value="delete">
+<input type="hidden" name="id" value="{{sh[0]}}">
+
+<button>Delete</button>
+
+</form>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>

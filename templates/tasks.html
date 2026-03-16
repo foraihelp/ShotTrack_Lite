@@ -1,0 +1,28 @@
+<h2>Departments</h2>
+
+<form method="POST">
+
+<select name="department">
+
+<option>Matchmove</option>
+<option>Animation</option>
+<option>FX</option>
+<option>Lighting</option>
+<option>Comp</option>
+<option>Roto</option>
+<option>Paint</option>
+<option>AI Creation</option>
+
+</select>
+
+<input name="artist" placeholder="Artist">
+
+<button>Add</button>
+
+</form>
+
+<hr>
+
+{% for t in tasks %}
+<a href="/task/{{t[0]}}">{{t[2]}}</a><br>
+{% endfor %}

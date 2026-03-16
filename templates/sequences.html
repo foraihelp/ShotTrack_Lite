@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<style>
+
+body{
+font-family:Arial;
+}
+
+table{
+border-collapse:collapse;
+width:80%;
+}
+
+th,td{
+border:1px solid #ccc;
+padding:8px;
+text-align:center;
+}
+
+th{
+background:#333;
+color:white;
+}
+
+.yts{background:#d9d9d9;}
+.wip{background:#fff3a0;}
+.finished{background:#4dabf7;}
+.delivered{background:#6bcf63;}
+.omitted{background:#ff4d4d;}
+
+</style>
+
+</head>
+
+<body>
+
+<h3>
+
+<a href="/">Projects</a> /
+<a href="/project/{{project[0]}}">{{project[1]}}</a> /
+{{unit[1]}}
+
+</h3>
+
+<h3>Add Sequence</h3>
+
+<form method="POST">
+
+<input type="hidden" name="action" value="add">
+
+<button>Add Sequence</button>
+
+</form>
+
+<hr>
+
+<table>
+
+<tr>
+<th>Sequence</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+{% for s in sequences %}
+
+<tr class="{{s[2]|lower}}">
+
+<td>
+
+<a href="/sequence/{{s[0]}}">
+{{s[1]}}
+</a>
+
+</td>
+
+<td>
+
+<form method="POST">
+
+<input type="hidden" name="action" value="status">
+<input type="hidden" name="id" value="{{s[0]}}">
+
+<select name="value" onchange="this.form.submit()">
+
+<option {% if s[2]=='YTS' %}selected{% endif %}>YTS</option>
+<option {% if s[2]=='WIP' %}selected{% endif %}>WIP</option>
+<option {% if s[2]=='FINISHED' %}selected{% endif %}>FINISHED</option>
+<option {% if s[2]=='DELIVERED' %}selected{% endif %}>DELIVERED</option>
+<option {% if s[2]=='OMITTED' %}selected{% endif %}>OMITTED</option>
+
+</select>
+
+</form>
+
+</td>
+
+<td>
+
+<form method="POST" style="display:inline">
+
+<input type="hidden" name="action" value="rename">
+<input type="hidden" name="id" value="{{s[0]}}">
+
+<input name="new" placeholder="Rename">
+
+<button>Rename</button>
+
+</form>
+
+<form method="POST" style="display:inline">
+
+<input type="hidden" name="action" value="delete">
+<input type="hidden" name="id" value="{{s[0]}}">
+
+<button>Delete</button>
+
+</form>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>
